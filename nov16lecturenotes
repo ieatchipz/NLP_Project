@@ -18,3 +18,10 @@ way 2: algorithm, write a while loop that starts at the beg stop everytime there
 (flag that turns on if theres a double quote and munches everything till the next double quote)
 
 https://drive.google.com/file/d/1zAt_1l9Kyy1sQLLGNXu-vYkWgx33xfn-/view?usp=sharing
+
+copy out tester test case and change the inputs and outpus to test these two things (tests cases for twitter) 
+use .split to split date up 
+
+if month is 1 -> jan 
+if month is 2 -> feb 
+if statement for each month 
