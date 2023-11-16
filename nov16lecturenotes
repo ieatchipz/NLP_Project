@@ -1,0 +1,27 @@
+Nov 16 Lecture Notes: (how to solve part 2)
+
+What will we be doing? -> chops up string into all pieces and create a sentence object with all three //that the method will return 
+
+For Political Dataset: 
+hw 5 problem 8 convert line method 
+
+
+double comma: no data given
+
+For covid Dataset: 
+
+way 1: in excel, force it to put double quotes around everything (reformatting file to have double quotes)
+Make sure to submit with every file you submit it so it is updated
+
+way 2: algorithm, write a while loop that starts at the beg stop everytime theres a comma and empty basket
+-> if after a comma there is a double quote, keep reading till theres another double quote
+(flag that turns on if theres a double quote and munches everything till the next double quote)
+
+https://drive.google.com/file/d/1zAt_1l9Kyy1sQLLGNXu-vYkWgx33xfn-/view?usp=sharing
+
+copy out tester test case and change the inputs and outpus to test these two things (tests cases for twitter) 
+use .split to split date up 
+
+if month is 1 -> jan 
+if month is 2 -> feb 
+if statement for each month 
