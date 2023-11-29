@@ -10,15 +10,16 @@ public class Driver {
             String line;
             
             while ((line = br.readLine()) != null) {
-                // Assuming CSV format: favorite_count, retweet_count, created_at, hashtags, original_author, user_mentions, place, clean_tweet
-                 String[] data = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-
-                if (data.length >= 8) {
-                    Sentence sentence = new Sentence(data[7], data[4], data[2]);
-                    System.out.println(sentence.toString());
-                } //else {
-                    //System.out.println("Invalid data: " + line);
-                //}
+                Sentence sentence = Sentence.convertLine(line);
+                if (sentence != null) {
+                    System.out.println("Text: " + sentence.getText());
+                    System.out.println("Author: " + sentence.getAuthor());
+                    System.out.println("Timestamp: " + sentence.getTimestamp());
+                    System.out.println(); // Adding a blank line for better readability
+                } else {
+                    // Optional: Handle invalid data or simply skip
+                    // System.out.println("Invalid data: " + line);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
