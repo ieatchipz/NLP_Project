@@ -40,9 +40,20 @@ public class Sentence{
     return "{author:" + author + ", sentence:\"" + text + "\", timestamp:\"" + timestamp + "\"}";
   }
 
+  public ArrayList<String> splitSentence() { // (used HW8 as inspo) this part splits the sentence of the tweet into seperate words
+	ArrayList<String> words = new ArrayList<>();
+	String[] splitWords = this.text.split(" ");
+	words.addAll(Arrays.asList(splitWords));
+	return words;
+
+	
+}
+
+
+
     // for Twitter COVID dataset
     public static Sentence convertLine(String line){
-      //System.out.println(line);
+      System.out.println(line);
       String[] pieces = new String[8];
 
       String basket = "";
@@ -60,7 +71,7 @@ public class Sentence{
         }
       }
       pieces[ctr] = basket;
-      //System.out.println(Arrays.toString(pieces));
+      System.out.println(Arrays.toString(pieces));
       String date = pieces[2];
       String username = pieces[4];
       String tweet = pieces[7];
@@ -107,6 +118,5 @@ public class Sentence{
       String text = tweet;
       return new Sentence(text, author, date);
     }
+  }
 
-
-}
