@@ -35,7 +35,7 @@ public class Driver{
     }
 	}
 
-  private static HashMap<String, Integer> printTopWords(ArrayList<Sentence> sentences) { //needs to go outside of main, new
+  public static HashMap<String, Integer> printTopWords(ArrayList<Sentence> sentences) { //needs to go outside of main, new
     HashMap<String, Integer> wordCount = new HashMap<>();
     for (Sentence sentence : sentences) {
       ArrayList<String> words = sentence.splitSentence();
