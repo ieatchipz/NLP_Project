@@ -41,8 +41,9 @@ public class Sentence{
   }
 
   public ArrayList<String> splitSentence() { // (used HW8 as inspo) this part splits the sentence of the tweet into seperate words
-
-    String[] stopwords = {
+    String[] splitWords = text.split(" ");
+      ArrayList<String> words = new ArrayList<>((Arrays.asList(splitWords)));
+     String[] stopwords ={
       "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "aren't", 
       "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by", 
       "can't", "cannot", "could", "couldn't", "did", "didn't", "do", "does", "doesn't", "doing", "don't", 
@@ -63,17 +64,23 @@ public class Sentence{
       "mightn't", "mustn't", "needn't", "shan't", "shouldn't", "wasn't", "weren't", "won't", "wouldn't", 
       "daren", "daren't", "oughtn", "oughtn't","go","let"}; 
 
-	ArrayList<String> words = new ArrayList<>();
-
-	String[] splitWords = text.split(" ");
   //for loop thru splitwords
   //if splitwords[i] is in stopwords, do not add
   //else, add it
+        for(int i = 0; i < splitWords.length; i++){
+          for(int j = 0; j < stopwords.length; j++){
+            if(splitWords[i].equals(stopwords[j])){
+              splitWords.remove(stopwords[i]);
+            }else{
+              
+            words.addAll(Arrays.asList(splitWords));
 
-	words.addAll(Arrays.asList(splitWords));
-	return words;
+            }
+          }
 
-	
+        }
+
+return words;	
 }
 
 
