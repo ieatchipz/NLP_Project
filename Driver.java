@@ -32,12 +32,15 @@ public class Driver{
         Sentence sentence = Sentence.convertLine(strippedLine);
         tweets.add(sentence);
         ctr++;
+        
       }
     }catch(Exception e){
         e.printStackTrace();
         System.out.println(ctr);
     }
+    
 	}
+  
 
     public static HashMap<String, Integer> printTopWords(ArrayList<Sentence> sentences){
     HashMap<String,Integer> wordCounts = new HashMap<String,Integer>();
@@ -61,7 +64,10 @@ public class Driver{
   public static void main(String[] args){
     ArrayList <Sentence> sentences = new ArrayList<Sentence>();
 
+
     
+
+
     readTwitterData(sentences);
 
 
@@ -87,7 +93,10 @@ public class Driver{
     for (int i = 0; i < results.size() && i < 100; i++)
         System.out.println(results.get(i));
 
-
+    for(int i = 0; i< sentences.size(); i++){
+      System.out.println(sentences.get(i).getSentiment());
+      //System.out.println("hi");
+    }
   }
 
 }
