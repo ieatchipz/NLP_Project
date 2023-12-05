@@ -40,38 +40,41 @@ public class Sentence{
     return "{author:" + author + ", sentence:\"" + text + "\", timestamp:\"" + timestamp + "\"}";
   }
 
-  public ArrayList<String> splitSentence() { // (used HW8 as inspo) this part splits the sentence of the tweet into seperate words
-    String[] splitWords = text.split(" ");
+   public ArrayList<String> splitSentence() { // (used HW8 as inspo) this part splits the sentence of the tweet into seperate words
+      String[] splitWords = text.split(" ");
       ArrayList<String> words = new ArrayList<>((Arrays.asList(splitWords)));
-     String[] stopwords ={
-      "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "aren't", 
-      "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by", 
-      "can't", "cannot", "could", "couldn't", "did", "didn't", "do", "does", "doesn't", "doing", "don't", 
-      "down", "during", "each", "few", "for", "from", "further", "had", "hadn't", "has", "hasn't", "have", 
-      "haven't", "having", "he", "he'd", "he'll", "he's", "her", "here", "here's", "hers", "herself", "him", 
-      "himself", "his", "how", "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into", "is", "isn't", 
-      "it", "it's", "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself", "no", "nor", 
-      "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours", "ourselves", "out", 
-      "over", "own", "same", "shan't", "she", "she'd", "she'll", "she's", "should", "shouldn't", "so", "some", 
-      "such", "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", "there", 
-      "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those", "through", "to", 
-      "too", "under", "until", "up", "very", "was", "wasn't", "we", "we'd", "we'll", "we're", "we've", "were", 
-      "weren't", "what", "what's", "when", "when's", "where", "where's", "which", "while", "who", "who's", 
-      "whom", "why", "why's", "with", "won't", "would", "wouldn't", "you", "you'd", "you'll", "you're", 
-      "you've", "your", "yours", "yourself", "yourselves", "ain't", "aren", "couldn", "didn", "doesn", "hadn", 
-      "hasn", "haven", "isn", "ma", "mightn", "mustn", "needn", "shan", "shouldn", "wasn", "weren", "won", 
-      "wouldn", "ain", "aren't", "couldn't", "didn't", "doesn't", "hadn't", "hasn't", "haven't", "isn't", 
-      "mightn't", "mustn't", "needn't", "shan't", "shouldn't", "wasn't", "weren't", "won't", "wouldn't", 
-      "daren", "daren't", "oughtn", "oughtn't","go","let"}; 
+      String[] stopwords = {"a", "about", "above", "after", "again", "against", "all", "am", "an", "and", 
+      "any", "are", "aren't", "as", "at", "be", "because", "been", "before", "being", "below", "between",
+       "both", "but", "by", "can't", "cannot", "could", "couldn't", "did", "didn't", "do", "does", "doesn't",
+        "doing", "don't", "down", "during", "each", "few", "for", "from", "further", "had", "hadn't", "has",
+         "hasn't", "have", "haven't", "having", "he", "he'd", "he'll", "he's", "her", "here", "here's", "hers", 
+         "herself", "him", "himself", "his", "how", "how's", "i", "i'd", "i'll", "i'm", "i've", "if", "in", "into",
+          "is", "isn't", "it", "it's", "its", "itself", "let's", "me", "more", "most", "mustn't", "my", "myself",
+           "no", "nor", "not", "of", "off", "on", "once", "only", "or", "other", "ought", "our", "ours ourselves", 
+           "out", "over", "own", "same", "shan't", "she", "she'd", "she'll", "she's", "should", "shouldn't", "so",
+            "some", "such", "than", "that", "that's", "the", "their", "theirs", "them", "themselves", "then", 
+            "there", "there's", "these", "they", "they'd", "they'll", "they're", "they've", "this", "those",
+             "through", "to", "too", "under", "until", "up", "very", "was", "wasn't", "we", "we'd", "we'll",
+              "we're", "we've", "were", "weren't", "what", "what's", "when", "when's", "where", "where's",
+               "which", "while", "who", "who's", "whom", "why", "why's", "with", "won't", "would", "wouldn't", 
+               "you", "you'd", "you'll", "you're", "you've", "your", "yours", "yourself", "yourselves"}; 
+               //from https://www.ranks.nl/stopwords
+
+   
+      for(int i = 0; i < splitWords.length; i++){
+      for (int j = 0; j < stopwords.length; j++) {
+        if (words.contains(stopwords[j])) {
+            words.remove(stopwords[j]);//remove it
+        }
+    } //https://stackoverflow.com/questions/35319544/removing-stopwords-java
 
   //for loop thru splitwords
   //if splitwords[i] is in stopwords, do not add
   //else, add it
-        for(int i = 0; i < splitWords.length; i++){
+     /*    for(int i = 0; i < splitWords.length; i++){
           for(int j = 0; j < stopwords.length; j++){
             if(splitWords[i].equals(stopwords[j])){
-             words.remove(stopwords[i]);
-
+              words.remove(stopwords[i]);
             }else{
               
             words.addAll(Arrays.asList(splitWords));
@@ -80,9 +83,12 @@ public class Sentence{
           }
 
         }
+*/
 
-return words;	
 }
+     return words;	
+
+   }
 
 
 
