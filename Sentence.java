@@ -70,7 +70,8 @@ public class Sentence{
         for(int i = 0; i < splitWords.length; i++){
           for(int j = 0; j < stopwords.length; j++){
             if(splitWords[i].equals(stopwords[j])){
-              splitWords.remove(stopwords[i]);
+             words.remove(stopwords[i]);
+
             }else{
               
             words.addAll(Arrays.asList(splitWords));
