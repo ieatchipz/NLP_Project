@@ -40,7 +40,7 @@ public class Driver{
     }
     
 	}
-  
+    //run a for loop that rips out anything that is blank
 
     public static HashMap<String, Integer> printTopWords(ArrayList<Sentence> sentences){
     HashMap<String,Integer> wordCounts = new HashMap<String,Integer>();
@@ -93,10 +93,50 @@ public class Driver{
     for (int i = 0; i < results.size() && i < 100; i++)
         System.out.println(results.get(i));
 
-    for(int i = 0; i< sentences.size(); i++){
-      System.out.println(sentences.get(i).getSentiment());
-      //System.out.println("hi");
-    }
-  }
+       /*  for(int i = 0; i < sentences.size(); i++){
+          if(!sentences.get(i).getText().equals(" ")) {
+              //System.out.println(sentences.get(i).getText());
+              //System.out.println(sentences.get(i).getSentiment());
+              System.out.println(sentences.get(i).getSentiment());
+          }
+      } */
 
+
+      for (int i = 0; i < sentences.size(); i++) {
+				Sentence texter = sentences.get(i);
+				if (!(sentences.get(i).getText().equals(" "))) {
+					System.out.println(texter.getSentiment());
+				} 
+			}
+		}
 }
+
+/* 
+			for (int i = 0; i < sentences.size(); i++) {
+
+				Sentence texter = sentences.get(i);
+
+				if (!(sentences.get(i).getText().equals(" "))) {
+					System.out.println(texter.getSentiment());
+          System.out.println("Sentiment Score: " + texter.getSentiment());
+            }
+				} 
+			}
+		}
+*/
+  
+//add a method that filters dates and prints out sentiement for each year 
+//have it in the for loop that prints out the sentiement for each sentence but make an if statement that
+//prints it out within date ranges
+//for (int i = 0; i < sentences.size(); i++) {
+//if(sentences.get(i).keep("year")==true)
+//sum+= System.out.println(sentences.get(i).getsentiment())
+
+// average sum 
+
+//A date range such as "May 31 2009-Jun 02 2009" if you are using tweets, or
+
+// (ts > startDate && ts < endDate)
+// return true 
+  
+
