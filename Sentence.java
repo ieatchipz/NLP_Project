@@ -212,12 +212,14 @@ public class Sentence{
       return new Sentence(text, author, date);
     }
 
+
+/* 
     public boolean keep(String temporalRange){
       String[]range = temporalRange.split(" - ");
       String[] dates = timestamp.split(" ");
-      if(dates[2] == "2020" || dates[2] == "2019" || dates[2] == "2018" ){
-        if(dates[1] == "15"|| dates[0] == "16" || dates[0] == "17" || dates[0] == "18"){
-        if(dates[0] == "Jan" || dates[0] == "Feb" || dates[0] == "March" || dates[0] == "April"){
+      if(dates[2] == "2020" ){
+        if(dates[1] == "15"){
+        if(dates[0] == "April"){
             return true;
           }
         
@@ -227,9 +229,8 @@ public class Sentence{
       
       return false;
     }
-
-
-/* 
+      */
+ /*/
     public boolean keep (String temporalRange){
       String startDate ="April 19 2020" ;  
       String endDate = "April 25 2020";
@@ -280,23 +281,31 @@ public class Sentence{
     }
 
     */
-/* 
-  public boolean keep(String temporalRange) {
-        try {
-            String[] dates = temporalRange.split("-");
-            SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd yyyy");
-            SimpleDateFormat csvFormatter = new SimpleDateFormat("M/dd/yyyy HH:mm");
-            Date startDate = formatter.parse(dates[0]);
-            Date endDate = formatter.parse(dates[1]);
-            Date sentenceDate = csvFormatter.parse(this.timestamp);
-
-            return !sentenceDate.before(startDate) && !sentenceDate.after(endDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-*/
+ 
+    public boolean keep(String temporalRange) {
+      try {
+          String[] dates = temporalRange.split(" - ");
+          
+          // Debugging: Print the dates to check their format
+          System.out.println("Start Date: " + dates[0]);
+          System.out.println("End Date: " + dates[1]);
+  
+          SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd yyyy");
+  
+          // Trim to remove any leading/trailing whitespace
+          Date startDate = formatter.parse(dates[0].trim());
+          Date endDate = formatter.parse(dates[1].trim());
+  
+          SimpleDateFormat csvFormatter = new SimpleDateFormat("M/dd/yyyy HH:mm");
+          Date sentenceDate = csvFormatter.parse(this.timestamp.trim());
+  
+          return !sentenceDate.before(startDate) && !sentenceDate.after(endDate);
+      } catch (ParseException e) {
+          e.printStackTrace();
+          return false;
+      }
+  }
+  
 
 
     public int getSentiment(){

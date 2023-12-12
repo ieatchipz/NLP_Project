@@ -81,8 +81,7 @@ public class Driver{
           e.printStackTrace();
       }
   
-      // Use formattedDate and other pieces for creating a Sentence object
-      // Example (you need to adjust this according to your actual Sentence constructor):
+      
       return new Sentence(pieces[7], pieces[4], formattedDate);
   }
 
@@ -97,17 +96,9 @@ public class Driver{
 
 
     readTwitterData(sentences);
- 
-    for(int i = 0; i < sentences.size(); i++){
-          if(!sentences.get(i).getText().equals("")) {
-              
-             // System.out.println(sentences.get(i).getSentiment());
-             // System.out.println(sentences.get(i));
-          }
-      }
 
-      ArrayList <Sentence> finalArrayList = new ArrayList <Sentence> ();
-      String temporalRange = "April 19 2020 - April 25 2020";
+       ArrayList <Sentence> finalArrayList = new ArrayList <Sentence> ();
+       String temporalRange = "April 24 2020 - April 24 2020";
       for (int i = 0; i < sentences.size(); i++) {
 				Sentence brandnew = sentences.get(i);
         if(brandnew.keep(temporalRange)){
@@ -115,7 +106,18 @@ public class Driver{
 
         }
       }
+ 
+    for(int i = 0; i < sentences.size(); i++){
+          if(!sentences.get(i).getText().equals("")) {
+              
+              System.out.println(sentences.get(i).getSentiment());
+              System.out.println(sentences.get(i));
+          }
+      }
 
+   
+
+      /* 
       double sum = 0;
       int count = 0;
       for(int i = 0; i < sentences.size(); i++){
@@ -127,7 +129,7 @@ public class Driver{
       double average = count > 0 ? sum / count : 0;
       System.out.println("Average Sentiment: " + average);
 
- 
+ */
       /*if (temporalRange == null || temporalRange.isEmpty()) {
         // If the temporal range is not provided, return true by default
         return true;
@@ -214,4 +216,3 @@ public class Driver{
 // (ts > startDate && ts < endDate)
 // return true 
   
-
