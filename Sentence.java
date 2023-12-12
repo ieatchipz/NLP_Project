@@ -10,8 +10,14 @@ import edu.stanford.nlp.trees.Tree;
 import edu.stanford.nlp.util.CoreMap;
 
 import java.util.Arrays;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Sentence{
   private String text;
@@ -51,6 +57,9 @@ public class Sentence{
   public String toString(){
     return "{author:" + author + ", sentence:\"" + text + "\", timestamp:\"" + timestamp + "\"}";
   }
+
+ 
+   
 
    public ArrayList<String> splitSentence() { // (used HW8 as inspo) this part splits the sentence of the tweet into seperate words
       String[] splitWords = text.split(" ");
@@ -130,7 +139,6 @@ public class Sentence{
    }
 
    
-   
 
 
 
@@ -196,22 +204,113 @@ public class Sentence{
         month = "December";
 
       date = month + " " + datePieces[1] + " 20" +  datePieces[2];
+
+      
   
       String author = username;
       String text = tweet;
       return new Sentence(text, author, date);
     }
 
+    public boolean keep(String temporalRange){
+      String[]range = temporalRange.split(" - ");
+      String[] dates = timestamp.split(" ");
+      if(dates[2] == "2020" || dates[2] == "2019" || dates[2] == "2018" ){
+        if(dates[1] == "15"|| dates[0] == "16" || dates[0] == "17" || dates[0] == "18"){
+        if(dates[0] == "Jan" || dates[0] == "Feb" || dates[0] == "March" || dates[0] == "April"){
+            return true;
+          }
+        
+          }
+        
+      }
+      
+      return false;
+    }
+
+
+/* 
+    public boolean keep (String temporalRange){
+      String startDate ="April 19 2020" ;  
+      String endDate = "April 25 2020";
+      SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
+
+      try{
+        Date givenDate1 = dateFormat.parse(startDate);
+        Date givenDate2 = dateFormat.parse(endDate);
+        Date givenDate3 = dateFormat.parse(this.timestamp);
+        Timestamp startStamp = new Timestamp(givenDate1.getTime());
+        Timestamp endStamp = new Timestamp(givenDate2.getTime());
+        Timestamp tweetStamp = new Timestamp(givenDate3.getTime());
+      } catch (ParseException e){
+        e.printStackTrace();
+      }
+
+      if(tweetStamp > startStamp && tweetStamp < endStamp)
+
+        return true; 
+      else
+        return false;
+
+      }
+     
+
+*/
+
+
+    /* 
+    public boolean keep(String temporalRange){
+      String[]range = temporalRange.split(" - ");
+      String[] dates = timestamp.split(" ");
+      if(dates[2] == "2009"){
+        if(dates[0] == "May"){
+          if(dates[1] == "31"){
+            return true;
+          }
+        }
+        else if(dates[0] == "June"){
+          if(dates[1] == "1" || dates[1] == "2"){
+            return true;
+          }
+        }
+      }
+      
+      return false;
+
+    }
+
+    */
+/* 
+  public boolean keep(String temporalRange) {
+        try {
+            String[] dates = temporalRange.split("-");
+            SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd yyyy");
+            SimpleDateFormat csvFormatter = new SimpleDateFormat("M/dd/yyyy HH:mm");
+            Date startDate = formatter.parse(dates[0]);
+            Date endDate = formatter.parse(dates[1]);
+            Date sentenceDate = csvFormatter.parse(this.timestamp);
+
+            return !sentenceDate.before(startDate) && !sentenceDate.after(endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+*/
+
+
     public int getSentiment(){
-    String tweet = this.text; //word? 
+    String tweet = this.text;
     Properties props = new Properties();
     props.setProperty("annotators", "tokenize, ssplit, pos, parse, sentiment");
     StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
-    Annotation annotation = pipeline.process(text);
+    Annotation annotation = pipeline.process(tweet);
     CoreMap sentence = annotation.get(CoreAnnotations.SentencesAnnotation.class).get(0);
     Tree tree = sentence.get(SentimentCoreAnnotations.SentimentAnnotatedTree.class);
     return RNNCoreAnnotations.getPredictedClass(tree);
 }
+
+   
   }
 
   

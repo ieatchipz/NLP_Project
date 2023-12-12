@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,19 +11,23 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map; //place with imports
+import java.util.Properties;
+
+
 import java.util.Collections; //place with imports
 import java.util.Comparator;
+import java.util.Date;
 
 
 public class Driver{
-
+  
   private static void readTwitterData(ArrayList<Sentence> tweets){
 
 	
     int ctr = 0;
     try{
       //open the csv file for reading
-      File file = new File("covid_10K.csv");
+      File file = new File("Covid_10k.csv");
       BufferedReader reader = new BufferedReader(new FileReader(file));
       String line = null;
 
@@ -60,15 +66,82 @@ public class Driver{
     return wordCounts; 
     }
 
+    public static Sentence convertLine(String line) {
+      // Initialize the pieces array
+      String[] pieces = line.split(","); // Or any other logic to split the line
   
+      // Your existing date parsing logic...
+      SimpleDateFormat originalFormat = new SimpleDateFormat("M/dd/yyyy HH:mm");
+      SimpleDateFormat targetFormat = new SimpleDateFormat("MMMM dd yyyy");
+      String formattedDate = "";
+      try {
+          Date date = originalFormat.parse(pieces[2]);
+          formattedDate = targetFormat.format(date);
+      } catch (ParseException e) {
+          e.printStackTrace();
+      }
+  
+      // Use formattedDate and other pieces for creating a Sentence object
+      // Example (you need to adjust this according to your actual Sentence constructor):
+      return new Sentence(pieces[7], pieces[4], formattedDate);
+  }
+
   public static void main(String[] args){
     ArrayList <Sentence> sentences = new ArrayList<Sentence>();
+
+    
+
 
 
     
 
 
     readTwitterData(sentences);
+ 
+    for(int i = 0; i < sentences.size(); i++){
+          if(!sentences.get(i).getText().equals("")) {
+              
+             // System.out.println(sentences.get(i).getSentiment());
+             // System.out.println(sentences.get(i));
+          }
+      }
+
+      ArrayList <Sentence> finalArrayList = new ArrayList <Sentence> ();
+      String temporalRange = "April 19 2020 - April 25 2020";
+      for (int i = 0; i < sentences.size(); i++) {
+				Sentence brandnew = sentences.get(i);
+        if(brandnew.keep(temporalRange)){
+          finalArrayList.add(brandnew);
+
+        }
+      }
+
+      double sum = 0;
+      int count = 0;
+      for(int i = 0; i < sentences.size(); i++){
+          if(sentences.get(i).keep("April 19 2020 - April 25 2020")){
+              sum += sentences.get(i).getSentiment();
+              count++;
+          }
+      }
+      double average = count > 0 ? sum / count : 0;
+      System.out.println("Average Sentiment: " + average);
+
+ 
+      /*if (temporalRange == null || temporalRange.isEmpty()) {
+        // If the temporal range is not provided, return true by default
+        return true;
+    }
+      */
+/* 
+    for (int i = 0; i < sentences.size(); i++) {
+        System.out.println(sentences.get(i).toString()); 
+            if (sentences.get(i).getText().length() > -1) {
+              System.out.println(sentences.get(i).getSentiment());
+                    System.out.println(sentences.get(i).getSentiment());     
+            }
+    }
+*/
 
 
 
@@ -93,6 +166,9 @@ public class Driver{
     for (int i = 0; i < results.size() && i < 100; i++)
         System.out.println(results.get(i));
 
+  }
+}
+
        /*  for(int i = 0; i < sentences.size(); i++){
           if(!sentences.get(i).getText().equals(" ")) {
               //System.out.println(sentences.get(i).getText());
@@ -102,14 +178,13 @@ public class Driver{
       } */
 
 
-      for (int i = 0; i < sentences.size(); i++) {
-				Sentence texter = sentences.get(i);
-				if (!(sentences.get(i).getText().equals(" "))) {
-					System.out.println(texter.getSentiment());
-				} 
-			}
-		}
-}
+      
+
+     
+
+     
+		
+
 
 /* 
 			for (int i = 0; i < sentences.size(); i++) {
